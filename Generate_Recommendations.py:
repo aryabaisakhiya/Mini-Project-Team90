@@ -1,0 +1,13 @@
+import requests
+import json
+
+class Generator:
+    def __init__(self, nutrition_input, ingredients=[], params={'n_neighbors': 5, 'return_distance': False}):
+        self.nutrition_input, self.ingredients, self.params = nutrition_input, ingredients, params
+
+    def set_request(self, nutrition_input, ingredients, params):
+        self.nutrition_input, self.ingredients, self.params = nutrition_input, ingredients, params
+
+    def generate(self):
+        request = {'nutrition_input': self.nutrition_input, 'ingredients': self.ingredients, 'params': self.params}
+        return requests.post(url='http://backend:8080/predict/', data=json.dumps(request))
